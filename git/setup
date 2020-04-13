@@ -1,6 +1,10 @@
 #!/bin/bash
+if [ -z "$USER_EMAIL" ]; then
+	read -p "Enter git user email" USER_EMAIL
+fi
+
 git config --global user.name 'derekgliwa'
-git config --global user.email 'dgliwa7bhs@gmail.com'
+git config --global user.email "$USER_EMAIL"
 git config --global alias.amend 'commit --amend --no-edit'
 git config --global alias.co 'checkout'
 git config --global alias.d 'diff'

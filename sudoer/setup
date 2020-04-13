@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "$(whoami) ALL=(ALL:ALL) NOPASSWD:All" > sudo tee -a /etc/sudoers > /dev/null

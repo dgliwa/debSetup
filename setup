@@ -2,7 +2,10 @@
 [ -z "$PS1" ] && return # Bail if not running interactively.
 
 if [ -z "$VPN_PASS" ]; then
-    read -p "Please enter evo vpn password" VPN_PASS
+    read -p "Please enter evo vpn password " VPN_PASS
+    read -p "Please enter evo gateway " VPN_GATEWAY
+    read -p "Please enter evo domain " VPN_DOMAIN
+    read -p "Please enter evo user " VPN_USERNAME
 fi
 
 DOTBIN="${HOME}/.bin"
@@ -51,8 +54,13 @@ if [ -z "$(code)" ]; then
 fi
 
 # install vpn and setup
-if [ ! -f "/etc/NetworkManager/system-connections/evo" ]
+if [ ! -f "/etc/NetworkManager/system-connections/evo" ]; then
     source $DOTBIN/vpn/setup
+fi
+
+# set up sudoers file
+if [ ! -z "$(sudo cat /etc/sudoers | grep $(whoami))" ]; then
+    source $DOTBIN/sudoers/setup
 fi
 
 cp $DOTBIN/profile/bashrc ~/.bashrc

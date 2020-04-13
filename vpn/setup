@@ -13,8 +13,8 @@ permissions=user:$(whoami):;
 timestamp=1586681030
 
 [vpn]
-domain=EVO
-gateway=vpn.evo.com
+domain=$VPN_DOMAIN
+gateway=$VPN_GATEWAY
 ipsec-enabled=yes
 ipsec-esp=3des-sha1
 ipsec-ike=3des-sha1-modp1024
@@ -26,7 +26,7 @@ refuse-chap=yes
 refuse-eap=yes
 refuse-mschap=yes
 refuse-mschapv2=yes
-user=dgliwa
+user=$VPN_USERNAME
 service-type=org.freedesktop.NetworkManager.l2tp
 
 [ipv4]
