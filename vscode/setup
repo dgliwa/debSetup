@@ -1,0 +1,3 @@
+#!/bin/bash
+curl -L "https://az764295.vo.msecnd.net/stable/2aae1f26c72891c399f860409176fe435a154b13/code_1.44.0-1586345345_amd64.deb" -o $DOTBIN/tmp/vscode.deb
+sudo dpkg --install $DOTBIN/tmp/vscode.deb

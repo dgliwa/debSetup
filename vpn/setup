@@ -1,0 +1,40 @@
+#!/bin/bash
+sudo apt install network-manager-l2tp  network-manager-l2tp-gnome
+sudo systemctl stop xl2tpd
+sudo systemctl disable xl2tpd
+
+sudo cat > /etc/NetworkManager/system-connections/evo << EOF
+[connection]
+id=evo
+uuid=3a731a2e-f700-491b-9981-6a15dad4ab16
+type=vpn
+autoconnect=false
+permissions=user:$(whoami):;
+timestamp=1586681030
+
+[vpn]
+domain=EVO
+gateway=vpn.evo.com
+ipsec-enabled=yes
+ipsec-esp=3des-sha1
+ipsec-ike=3des-sha1-modp1024
+ipsec-psk=$VPN_PASS
+mru=1400
+mtu=1400
+password-flags=2
+refuse-chap=yes
+refuse-eap=yes
+refuse-mschap=yes
+refuse-mschapv2=yes
+user=dgliwa
+service-type=org.freedesktop.NetworkManager.l2tp
+
+[ipv4]
+dns-search=
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+dns-search=
+method=auto
+EOF

@@ -1,0 +1,60 @@
+#!/bin/bash
+[ -z "$PS1" ] && return # Bail if not running interactively.
+
+if [ -z "$VPN_PASS" ]; then
+    read -p "Please enter evo vpn password" VPN_PASS
+fi
+
+DOTBIN="${HOME}/.bin"
+
+# set up git aliases
+source $DOTBIN/git/setup
+
+# install docker
+if [ -z "$(which docker)" ]; then
+    source $DOTBIN/docker/setup
+fi
+
+# install dconf
+if [ -z "$(which dconf-editor)" ]; then
+    source $DOTBIN/dconf/setup
+fi
+
+# install discord
+if [ -z "$(which discord)" ]; then
+    source $DOTBIN/discord/setup
+fi
+
+# install gnome indicator
+if [ -z "$(which gnome-shell-extension-appindicator)" ]; then
+    source $DOTBIN/gnome-shell-extension-appindicator/setup
+fi
+
+# install gparted
+if [ -z "$(gparted)" ]; then
+    source $DOTBIN/gparted/setup
+fi
+
+# install remmina
+if [ -z "$(remmina)" ]; then
+    source $DOTBIN/remmina/setup
+fi
+
+# install vim
+if [ -z "$(vim)" ]; then
+    source $DOTBIN/vim/setup
+fi
+
+# install vscode
+if [ -z "$(code)" ]; then
+    source $DOTBIN/vscode/setup
+fi
+
+# install vpn and setup
+if [ ! -f "/etc/NetworkManager/system-connections/evo" ]
+    source $DOTBIN/vpn/setup
+fi
+
+cp $DOTBIN/profile/bashrc ~/.bashrc
+
+source ~/.bashrc

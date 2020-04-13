@@ -1,0 +1,5 @@
+#!/bin/bash
+source $DOTBIN/.bin/docker/docker-engine.sh
+source $DOTBIN/.bin/docker/docker-compose.sh
+source $DOTBIN/.bin/docker/kind.sh
+source $DOTBIN/.bin/docker/kubectl.sh

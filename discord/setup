@@ -1,0 +1,3 @@
+#!/bin/bash
+curl -L "https://dl.discordapp.net/apps/linux/0.0.10/discord-0.0.10.deb" -o $DOTBIN/tmp/discord.deb
+sudo dpkg --install $DOTBIN/tmp/discord.deb
