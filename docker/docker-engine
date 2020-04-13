@@ -27,7 +27,7 @@ sudo groupadd docker
 
 sudo usermod -aG docker $USER
 
-sudo cat >> /etc/docker/daemon.json << EOF
+DAEMON_SETTINGS=$(cat << EOF
 {
     "bip": "172.18.0.1/16",
 	"default-address-pools":[
@@ -36,5 +36,8 @@ sudo cat >> /etc/docker/daemon.json << EOF
 	]
 }
 EOF
+)
+
+echo "$DAEMON_SETTINGS" | sudo tee /etc/docker/daemon.json
 
 sudo systemctl restart docker

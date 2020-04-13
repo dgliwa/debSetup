@@ -3,7 +3,7 @@ sudo apt install network-manager-l2tp  network-manager-l2tp-gnome
 sudo systemctl stop xl2tpd
 sudo systemctl disable xl2tpd
 
-sudo cat > /etc/NetworkManager/system-connections/evo << EOF
+VPN_CONFIG=$(cat << EOF
 [connection]
 id=evo
 uuid=3a731a2e-f700-491b-9981-6a15dad4ab16
@@ -38,3 +38,8 @@ addr-gen-mode=stable-privacy
 dns-search=
 method=auto
 EOF
+)
+
+echo "$VPN_CONFIG" | sudo tee /etc/NetworkManager/system-connections/evo
+sudo chmod 600 /etc/NetworkManager/system-connections/evo
+sudo systemctl restart NetworkManager

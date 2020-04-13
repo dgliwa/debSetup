@@ -1,7 +1,6 @@
 #!/bin/bash
-[ -z "$PS1" ] && return # Bail if not running interactively.
 
-if [ -z "$VPN_PASS" ]; then
+if [ -z "$VPN_PASS" && ! -f "/etc/NetworkManager/system-connections/evo" ]; then
     read -p "Please enter evo vpn password " VPN_PASS
     read -p "Please enter evo gateway " VPN_GATEWAY
     read -p "Please enter evo domain " VPN_DOMAIN
@@ -11,58 +10,76 @@ fi
 DOTBIN="${HOME}/.bin"
 
 # set up git aliases
-source $DOTBIN/git/setup
+if [ -z "$(git config --global --get user.name)" ]; then
+    echo "UPDATING GIT"
+    source $DOTBIN/git/setup
+fi
 
 # install docker
 if [ -z "$(which docker)" ]; then
+    echo "INSTALLING DOCKER"
     source $DOTBIN/docker/setup
 fi
 
 # install dconf
 if [ -z "$(which dconf-editor)" ]; then
+    echo "INSTALLING DCONF EDITOR"
     source $DOTBIN/dconf/setup
 fi
 
 # install discord
 if [ -z "$(which discord)" ]; then
+    echo "INSTALLING DISCORD"
     source $DOTBIN/discord/setup
 fi
 
 # install gnome indicator
+# TODO figure this out
 if [ -z "$(which gnome-shell-extension-appindicator)" ]; then
+    echo "INSTALLING GNOME SHELL EXTENSIONS"
     source $DOTBIN/gnome-shell-extension-appindicator/setup
 fi
 
 # install gparted
-if [ -z "$(gparted)" ]; then
+if [ -z "$(which gparted)" ]; then
+    echo "INSTALLING GPARTED"
     source $DOTBIN/gparted/setup
 fi
 
 # install remmina
-if [ -z "$(remmina)" ]; then
+if [ -z "$(which remmina)" ]; then
+    echo "INSTALLING REMMINA"
     source $DOTBIN/remmina/setup
 fi
 
 # install vim
-if [ -z "$(vim)" ]; then
+if [ -z "$(which vim)" ]; then
+    echo "INSTALLING VIM"
     source $DOTBIN/vim/setup
 fi
 
 # install vscode
-if [ -z "$(code)" ]; then
+if [ -z "$(which code)" ]; then
+    echo "INSTALLING VSCODE"
     source $DOTBIN/vscode/setup
 fi
 
 # install vpn and setup
 if [ ! -f "/etc/NetworkManager/system-connections/evo" ]; then
+    echo "SETTING UP VPN"
     source $DOTBIN/vpn/setup
 fi
 
 # set up sudoers file
 if [ ! -z "$(sudo cat /etc/sudoers | grep $(whoami))" ]; then
+    echo "SETTING UP SUDOERS FILE"
     source $DOTBIN/sudoers/setup
 fi
 
 cp $DOTBIN/profile/bashrc ~/.bashrc
 
+echo "SOURCING BASHRC"
 source ~/.bashrc
+
+
+echo "GGWP

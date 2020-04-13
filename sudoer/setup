@@ -1,2 +1,3 @@
 #!/bin/bash
-echo "$(whoami) ALL=(ALL:ALL) NOPASSWD:All" > sudo tee -a /etc/sudoers > /dev/null
+SUDOER_ENTRY= "$(whoami) ALL=(ALL:ALL) NOPASSWD:ALL"
+sudo set -i "/#includedir/i $SUDOER_ENTRY" /etc/sudoers
