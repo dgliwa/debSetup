@@ -1,2 +1,5 @@
 #!/bin/bash
 sudo apt install vim
+
+cp $DOTBIN/vim/.vimrc ~/.vimrc
+cp -r $DOTBIN/vim/.vimrc ~/.vim

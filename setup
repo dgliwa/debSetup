@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -z "$VPN_PASS" && ! -f "/etc/NetworkManager/system-connections/evo" ]; then
+if [ -z "$VPN_PASS" -a ! -f "/etc/NetworkManager/system-connections/evo" ]; then
     read -p "Please enter evo vpn password " VPN_PASS
     read -p "Please enter evo gateway " VPN_GATEWAY
     read -p "Please enter evo domain " VPN_DOMAIN
@@ -71,9 +71,9 @@ if [ ! -f "/etc/NetworkManager/system-connections/evo" ]; then
 fi
 
 # set up sudoers file
-if [ ! -z "$(sudo cat /etc/sudoers | grep $(whoami))" ]; then
+if [ -z "$(sudo cat /etc/sudoers | grep $(whoami))" ]; then
     echo "SETTING UP SUDOERS FILE"
-    source $DOTBIN/sudoers/setup
+    source $DOTBIN/sudoer/setup
 fi
 
 cp $DOTBIN/profile/bashrc ~/.bashrc
@@ -82,4 +82,5 @@ echo "SOURCING BASHRC"
 source ~/.bashrc
 
 
-echo "GGWP
+echo "GGWP"
+
