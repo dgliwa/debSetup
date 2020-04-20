@@ -52,6 +52,12 @@ if [ -z "$(which remmina)" ]; then
     source $DOTBIN/remmina/setup
 fi
 
+# install spotify
+if [ -z "$(which spotify)" ]; then
+    echo "INSTALLING SPOTIFY"
+    source $DOTBIN/spotify/setup
+fi
+
 # install vim
 if [ -z "$(which vim)" ]; then
     echo "INSTALLING VIM"
